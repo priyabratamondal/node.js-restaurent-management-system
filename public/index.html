@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food App - Frontend Status</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .header {
+        background: white;
+        border-radius: 12px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .status-dot {
+        width: 16px;
+        height: 16px;
+        background: #4caf50;
+        border-radius: 50%;
+        margin-right: 12px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      h1 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .section {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .section h2 {
+        color: #667eea;
+        font-size: 20px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+      }
+
+      label {
+        display: block;
+        color: #333;
+        font-weight: 500;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+
+      select,
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+      }
+
+      select:focus,
+      input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: #5568d3;
+      }
+
+      .response {
+        background: #f5f5f5;
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 20px;
+        min-height: 200px;
+        border-left: 4px solid #667eea;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        color: #333;
+        overflow-y: auto;
+        max-height: 300px;
+        display: none;
+      }
+
+      .response.show {
+        display: block;
+      }
+
+      .response.success {
+        border-left-color: #4caf50;
+        background: #f1f8f4;
+      }
+
+      .response.error {
+        border-left-color: #f44336;
+        background: #fdeaea;
+        color: #c62828;
+      }
+
+      .info-item {
+        background: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        border-left: 4px solid #667eea;
+      }
+
+      .info-item strong {
+        color: #667eea;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .info-item code {
+        background: white;
+        padding: 4px 8px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        word-break: break-all;
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        .section h2 {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="status">
+          <div class="status-dot"></div>
+          <div>
+            <h1>✓ Frontend Running</h1>
+            <p class="subtitle">Food App - API Testing Console</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- API Tester Section -->
+        <div class="section">
+          <h2>🔗 Test API Endpoints</h2>
+
+          <label for="method">Method:</label>
+          <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+          </select>
+
+          <label for="endpoint">Endpoint:</label>
+          <select id="endpoint">
+            <option value="/">Home (Status Page)</option>
+            <option value="/api/v1/test/test-user">Test User</option>
+            <option value="/api/v1/auth/register">Auth - Register</option>
+            <option value="/api/v1/auth/login">Auth - Login</option>
+            <option value="/api/v1/user/get-user">User - Get User</option>
+            <option value="/api/v1/resturant/get-all-restaurant">
+              Restaurant - Get All
+            </option>
+            <option value="/api/v1/category/get-all-category">
+              Category - Get All
+            </option>
+            <option value="/api/v1/food/get-all-food">Food - Get All</option>
+          </select>
+
+          <label for="reqBody">Request Body (JSON):</label>
+          <textarea
+            id="reqBody"
+            style="
+              width: 100%;
+              padding: 10px 12px;
+              margin-bottom: 15px;
+              border: 1px solid #ddd;
+              border-radius: 6px;
+              font-size: 12px;
+              font-family: &quot;Courier New&quot;, monospace;
+              height: 100px;
+              resize: vertical;
+            "
+          ></textarea>
+
+          <button onclick="testAPI()">Send Request</button>
+
+          <div id="response" class="response"></div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="section">
+          <h2>ℹ️ Frontend Info</h2>
+
+          <div class="info-item">
+            <strong>Frontend Status</strong>
+            <code>✓ Running Successfully</code>
+          </div>
+
+          <div class="info-item">
+            <strong>Backend URL</strong>
+            <code id="backendUrl">http://localhost:5000</code>
+          </div>
+
+          <div class="info-item">
+            <strong>API Base Path</strong>
+            <code>/api/v1</code>
+          </div>
+
+          <div class="info-item">
+            <strong>Available Routes</strong>
+            <ul style="margin-top: 8px; margin-left: 15px">
+              <li>Authentication</li>
+              <li>User Management</li>
+              <li>Restaurant</li>
+              <li>Category</li>
+              <li>Food Items</li>
+            </ul>
+          </div>
+
+          <div class="info-item">
+            <strong>Time</strong>
+            <code id="currentTime"></code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Update current time
+      function updateTime() {
+        const now = new Date();
+        document.getElementById("currentTime").textContent =
+          now.toLocaleString();
+      }
+      updateTime();
+      setInterval(updateTime, 1000);
+
+      // Get backend URL
+      const backendUrl = window.location.origin;
+      document.getElementById("backendUrl").textContent = backendUrl;
+
+      // Test API endpoint
+      async function testAPI() {
+        const method = document.getElementById("method").value;
+        const endpoint = document.getElementById("endpoint").value;
+        const reqBody = document.getElementById("reqBody").value;
+        const responseDiv = document.getElementById("response");
+
+        try {
+          const options = {
+            method: method,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+
+          if (method === "POST" && reqBody.trim()) {
+            options.body = reqBody;
+          }
+
+          const response = await fetch(backendUrl + endpoint, options);
+          const data = await response.text();
+
+          responseDiv.innerHTML = `<strong>Status: ${response.status} ${response.statusText}</strong>\n\n${data}`;
+          responseDiv.classList.add("show");
+          responseDiv.classList.remove("error");
+          responseDiv.classList.add("success");
+        } catch (error) {
+          responseDiv.innerHTML = `<strong>Error:</strong>\n${error.message}`;
+          responseDiv.classList.add("show");
+          responseDiv.classList.add("error");
+          responseDiv.classList.remove("success");
+        }
+      }
+
+      // Allow Enter key to send request
+      document
+        .getElementById("reqBody")
+        .addEventListener("keydown", function (e) {
+          if (e.ctrlKey && e.key === "Enter") {
+            testAPI();
+          }
+        });
+    </script>
+  </body>
+</html>

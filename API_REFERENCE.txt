@@ -1,0 +1,72 @@
+QUICK API REFERENCE - COPY PASTE URLS
+
+Base: http://localhost:8080/api/v1
+
+==================
+AUTH (No token needed)
+==================
+
+POST http://localhost:8080/api/v1/auth/register
+POST http://localhost:8080/api/v1/auth/login
+
+==================
+RESTAURANTS (No token needed)
+==================
+
+GET http://localhost:8080/api/v1/resturant/getAll
+GET http://localhost:8080/api/v1/resturant/get/RESTAURANT_ID
+
+POST http://localhost:8080/api/v1/resturant/create (need token)
+DELETE http://localhost:8080/api/v1/resturant/delete/RESTAURANT_ID (need token)
+
+==================
+FOOD (No token needed for GET)
+==================
+
+GET http://localhost:8080/api/v1/food/getAll
+GET http://localhost:8080/api/v1/food/get/FOOD_ID
+GET http://localhost:8080/api/v1/food/getByResturant/RESTAURANT_ID
+
+POST http://localhost:8080/api/v1/food/create (need token)
+PUT http://localhost:8080/api/v1/food/update/FOOD_ID (need token)
+DELETE http://localhost:8080/api/v1/food/delete/FOOD_ID (need token)
+POST http://localhost:8080/api/v1/food/placeorder (need token)
+POST http://localhost:8080/api/v1/food/orderStatus/ORDER_ID (admin + token)
+
+==================
+CATEGORIES (No token needed for GET)
+==================
+
+GET http://localhost:8080/api/v1/category/getAll
+POST http://localhost:8080/api/v1/category/create (need token)
+PUT http://localhost:8080/api/v1/category/update/CATEGORY_ID (need token)
+DELETE http://localhost:8080/api/v1/category/delete/CATEGORY_ID (need token)
+
+==================
+USERS (All need token)
+==================
+
+GET http://localhost:8080/api/v1/user/getUser (send id in body)
+PUT http://localhost:8080/api/v1/user/updateUser (send id in body)
+POST http://localhost:8080/api/v1/user/updatePassword (send id in body)
+POST http://localhost:8080/api/v1/user/resetPassword (send id in body)
+DELETE http://localhost:8080/api/v1/user/deleteUser/USER_ID
+
+==================
+TEST (No token needed)
+==================
+
+GET http://localhost:8080/api/v1/test/test-user
+
+==================
+IMPORTANT
+==================
+
+Your URL was: /api/v1/food/get-all-food ❌ WRONG
+Should be: /api/v1/food/getAll ✓ CORRECT
+
+All endpoints use camelCase (getAll, getUser, updateUser, etc)
+NOT kebab-case (get-all-food, get-user, update-user, etc)
+
+For ALL "get" requests without IDs, use: /getAll
+For ALL "get" requests with IDs, use: /get/:id
